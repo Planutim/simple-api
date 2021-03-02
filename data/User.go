@@ -19,10 +19,10 @@ import (
 type User struct {
 	ID        uuid.UUID `gorm:"primaryKey"`
 	Firstname string    `gorm:"size:256" json:"firstname" validate:"required,min=3"`
-	Lastname  string    `gorm:size:256" json:"lastname" validate:"required,min=3"`
+	Lastname  string    `gorm:"size:256" json:"lastname" validate:"required,min=3"`
 	Email     string    `gorm:"size:256;unique" json:"email" validate:"required,email"`
 	Age       uint      `json:"age" validate:"required,gte=0,lte=120"`
-	Created   time.Time
+	Created   time.Time `json:"-"`
 }
 
 func (u *User) BeforeCreate(tx *gorm.DB) error {
